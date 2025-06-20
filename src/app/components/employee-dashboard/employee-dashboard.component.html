@@ -1,0 +1,275 @@
+<div class="operator-screen">
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo-section">
+        <div class="logo">
+          <span class="logo-text">BS</span>
+        </div>
+        <h1 class="app-title">Benger Spinning</h1>
+      </div>
+      
+      <div class="user-info flex items-center gap-4">
+        <div class="user-profile flex items-center gap-2">
+          <div class="avatar">{{username.charAt(0) | uppercase}}</div>
+          <div class="user-details flex flex-col">
+            <span class="username font-semibold">{{username | uppercase}}</span>
+            <span class="date text-sm text-light">{{currentDate | date:'EEEE, MMMM d, y'}}</span>
+          </div>
+        </div>
+        
+        <div class="site-info flex items-center gap-2">
+          <div class="site-label text-sm text-light">Site</div>
+          <div class="site-name font-medium">WBO/Benger</div>
+          <button class="icon" (click)="logout()" (keydown.enter)="logout()" (keydown.space)="logout()" tabindex="0" aria-label="Logout" title="Logout">&#10148;</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h2 class="sidebar-title">Dashboard</h2>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <button class="menu-item" [class.active]="currentSection === 'spinning'" (click)="setCurrentSection('spinning')" (keydown.enter)="setCurrentSection('spinning')" tabindex="0">
+          <span class="menu-icon">🔄</span>
+          <span class="menu-text">Spinning Production</span>
+        </button>
+        <button class="menu-item" [class.active]="currentSection === 'history'" (click)="setCurrentSection('history')" (keydown.enter)="setCurrentSection('history')" tabindex="0">
+          <span class="menu-icon">📈</span>
+          <span class="menu-text">History</span>
+        </button>
+        <button class="menu-item" (click)="setCurrentSection('remarks')" (keydown.enter)="setCurrentSection('remarks')" tabindex="0">
+          Historical Remarks
+        </button>
+        <button class="menu-item" (click)="setCurrentSection('config')" (keydown.enter)="setCurrentSection('config')" tabindex="0">
+          Configuration
+        </button>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="version-info text-sm">v1.0.0</div>
+      </div>
+    </div>
+
+    <div class="content-area">
+      <!-- Spinning Production Section -->
+      <div *ngIf="currentSection === 'spinning'" class="spinning-section">
+        <div class="section-header">
+          <h2 class="section-title">Spinning Production</h2>
+          <p class="section-subtitle">Record new spinning production data</p>
+        </div>
+        
+        <div class="card production-card">
+          <form [formGroup]="spinningForm" (ngSubmit)="onSpinningSubmit()" class="production-form">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="machine">Machine <span class="required">*</span></label>
+                <div class="input-wrapper">
+                  <span class="input-icon">🔧</span>
+                  <input 
+                    type="text" 
+                    id="machine" 
+                    formControlName="machine"
+                    placeholder="Enter machine ID"
+                    class="form-control">
+                </div>
+                <div *ngIf="spinningForm.get('machine')?.invalid && spinningForm.get('machine')?.touched" class="error-message">
+                  Machine ID is required
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="shift">Shift <span class="required">*</span></label>
+                <div class="select-wrapper">
+                  <span class="input-icon">⏱️</span>
+                  <select id="shift" formControlName="shift" class="form-control">
+                    <option value="" disabled selected>Select shift</option>
+                    <option value="morning">Morning</option>
+                    <option value="afternoon">Afternoon</option>
+                    <option value="night">Night</option>
+                  </select>
+                  <span class="select-arrow">▼</span>
+                </div>
+                <div *ngIf="spinningForm.get('shift')?.invalid && spinningForm.get('shift')?.touched" class="error-message">
+                  Shift is required
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="remarks">Remarks</label>
+              <textarea 
+                id="remarks" 
+                formControlName="remarks" 
+                rows="3"
+                placeholder="Enter any additional remarks or notes"
+                class="form-control remarks-textarea"></textarea>
+            </div>
+            
+            <div class="form-actions">
+              <button type="button" class="btn-secondary" (click)="resetForm()">Reset</button>
+              <button type="submit" class="btn-primary" [disabled]="spinningForm.invalid">
+                <span *ngIf="submitting" class="spinner"></span>
+                <span *ngIf="!submitting">Submit</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Additional form sections -->
+        <div class="card production-card mt-4">
+          <div class="card-header">
+            <h3 class="card-title">Production Details</h3>
+          </div>
+          <div class="card-body">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="testPartInput">Test Part <span class="required">*</span></label>
+                <div class="input-group">
+                  <input id="testPartInput" type="text" class="form-control" [(ngModel)]="testPart">
+                  <span class="input-label">SM</span>
+                </div>
+                <div class="hint">Spinning SM should auto populate based on the selected test</div>
+              </div>
+
+              <div class="form-group">
+                <label for="tlCountInput">TL_count</label>
+                <div class="input-group">
+                  <input id="tlCountInput" type="text" class="form-control" [(ngModel)]="tlCount">
+                  <button class="btn-merge">Merge</button>
+                </div>
+                <div class="hint">Merge should auto populate based on selected Spinning SM</div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="revisionNoInput">Revision No <span class="required">*</span></label>
+                <input id="revisionNoInput" type="text" class="form-control" [(ngModel)]="revisionNo">
+                <div class="hint">All the dispositions should be defaulted to packed</div>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group checkbox-group">
+                <label for="isWasteCheckbox">Is Waste</label>
+                <input id="isWasteCheckbox" type="checkbox" [(ngModel)]="isWaste">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="doffNoInput">Doff No <span class="required">*</span></label>
+                <input id="doffNoInput" type="text" class="form-control" [(ngModel)]="doffNo">
+              </div>
+              <div class="form-group">
+                <label for="doffTimeInput">Doff Time <span class="required">*</span></label>
+                <input id="doffTimeInput" type="time" class="form-control" [(ngModel)]="doffTime">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="cartonNoInput">Carton No <span class="required">*</span></label>
+                <div class="input-group">
+                  <input id="cartonNoInput" type="text" class="form-control" [(ngModel)]="cartonNo">
+                  <button class="btn-add">Add Carton</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="cartonNo2Input">Carton No <span class="required">*</span></label>
+                <div class="input-group">
+                  <input id="cartonNo2Input" type="text" class="form-control" [(ngModel)]="cartonNo2" disabled>
+                  <button class="btn-remove">×</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="disposition-table-container">
+                <h3>Disposition Table</h3>
+                <table class="disposition-table" *ngIf="!showExtendedTable">
+                  <thead>
+                    <tr>
+                      <th>Thread Line</th>
+                      <th>Disposition</th>
+                      <th>Comment</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let row of dispositionRows; let i = index">
+                      <td>{{i + 1}}</td>
+                      <td>
+                        <select [(ngModel)]="row.disposition" class="form-control">
+                          <option value="packed">Packed</option>
+                          <option value="sampled">Sampled</option>
+                          <option value="cell-break">Cell break</option>
+                          <option value="waste">Waste</option>
+                        </select>
+                      </td>
+                      <td>
+                        <input type="text" class="form-control" [(ngModel)]="row.comment">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <!-- Extended 16-cell table as shown in screenshot 3 -->
+                <table class="disposition-table extended" *ngIf="showExtendedTable">
+                  <thead>
+                    <tr>
+                      <th>Thread Line</th>
+                      <th *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]">{{i}}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Disposition</td>
+                      <td *ngFor="let cell of extendedTableCells">
+                        <select [(ngModel)]="cell.disposition" class="form-control">
+                          <option value="sampled">Sampled</option>
+                          <option value="packed">Packed</option>
+                          <option value="waste">Waste</option>
+                          <option value="cell-break">Cell break</option>
+                        </select>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div class="table-toggle">
+                  <button (click)="toggleTableView()" class="btn-toggle">
+                    {{ showExtendedTable ? 'Show Simple View' : 'Show Extended View (16 cells)' }}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group remarks-group">
+                <label for="remarksTextarea">Remarks <span class="required">*</span></label>
+                <textarea id="remarksTextarea" class="form-control" [(ngModel)]="remarks" rows="4"></textarea>
+                <div class="hint">This is where the user can add operator remarks</div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn-history">Operator Remarks History</button>
+            </div>
+
+            <div class="form-actions main-actions">
+              <button class="btn-submit">Submit</button>
+              <button class="btn-cancel">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

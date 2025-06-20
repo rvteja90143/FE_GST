@@ -1,0 +1,101 @@
+<div class="login-page">
+  <div class="login-container">
+    <div class="header flex justify-between items-center">
+      <div class="title">Benger Spinning</div>
+      <div class="site-info flex items-center gap-2">
+        <span class="text-sm text-light">Site</span>
+        <span class="font-medium">WBO/Benger</span>
+       
+      </div>
+    </div>
+
+    <div class="card login-card">
+      <div class="card-header">
+        <h1 class="card-title">Welcome Back</h1>
+        <p class="card-subtitle">Please sign in to continue</p>
+      </div>
+
+      <div class="login-options">
+        <button type="button" class="btn-sso" (click)="initiateSSO()" *ngIf="!useLegacyLogin || (useLegacyLogin && loginForm.invalid)">
+          <span class="btn-icon">🔐</span>
+          <span>Single Sign On with Microsoft</span>
+        </button>
+        
+        <div class="divider" *ngIf="!useLegacyLogin">
+          <span>or</span>
+        </div>
+        
+        <button type="button" class="btn-text" (click)="toggleLoginMethod()" *ngIf="!useLegacyLogin">
+          Use username and password
+        </button>
+        
+        <button type="button" class="btn-text" (click)="toggleLoginMethod()" *ngIf="useLegacyLogin">
+          Back to Single Sign On
+        </button>
+      </div>
+      
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form" *ngIf="useLegacyLogin">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <div class="input-wrapper">
+            <span class="input-icon">👤</span>
+            <input 
+              type="text" 
+              id="username" 
+              formControlName="username" 
+              class="form-control" 
+              placeholder="Enter your username"
+              autocomplete="username">
+          </div>
+          <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="error-message">
+            Username is required
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <div class="label-row">
+            <label for="password">Password</label>
+            <a href="#" class="forgot-password">Forgot Password?</a>
+          </div>
+          <div class="input-wrapper">
+            <span class="input-icon">🔒</span>
+            <input 
+              type="password" 
+              id="password" 
+              formControlName="password" 
+              class="form-control" 
+              placeholder="Enter your password"
+              autocomplete="current-password">
+          </div>
+          <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message">
+            Password is required
+          </div>
+        </div>
+        
+        <div class="remember-me">
+          <label class="checkbox-container">
+            <input type="checkbox">
+            <span class="checkmark"></span>
+            Remember me
+          </label>
+        </div>
+        
+        <div class="form-actions">
+          <button type="submit" class="btn-login" [disabled]="loginForm.invalid">
+            <span *ngIf="loading" class="spinner"></span>
+            <span *ngIf="!loading">Sign In</span>
+          </button>
+          <button type="button" class="btn-cancel" (click)="onCancel()">Cancel</button>
+        </div>
+      </form>
+
+      <div *ngIf="error" class="error-alert">
+        {{ error }}
+      </div>
+
+      <div class="login-footer">
+        <p> 2025 Benger Spinning. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</div>

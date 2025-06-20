@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SVG to PNG Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .icon-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .icon-item {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+    button {
+      padding: 10px;
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>SVG to PNG Converter</h1>
+    <button id="convertAll">Convert All SVGs to PNGs</button>
+    <div class="icon-container" id="iconContainer"></div>
+  </div>
+
+  <script>
+    const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
+    const iconContainer = document.getElementById('iconContainer');
+    
+    // Load all SVG icons
+    sizes.forEach(size => {
+      const iconItem = document.createElement('div');
+      iconItem.className = 'icon-item';
+      
+      const img = document.createElement('img');
+      img.src = `icon-${size}x${size}.svg`;
+      img.width = size;
+      img.height = size;
+      img.id = `svg-${size}`;
+      
+      const label = document.createElement('p');
+      label.textContent = `${size}x${size}`;
+      
+      iconItem.appendChild(img);
+      iconItem.appendChild(label);
+      iconContainer.appendChild(iconItem);
+    });
+    
+    // Convert SVG to PNG
+    function convertSVGtoPNG(svgElement, size) {
+      return new Promise((resolve) => {
+        const canvas = document.createElement('canvas');
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext('2d');
+        
+        const img = new Image();
+        img.onload = function() {
+          ctx.drawImage(img, 0, 0, size, size);
+          const pngUrl = canvas.toDataURL('image/png');
+          
+          // Create download link
+          const a = document.createElement('a');
+          a.href = pngUrl;
+          a.download = `icon-${size}x${size}.png`;
+          a.click();
+          
+          resolve();
+        };
+        img.src = svgElement.src;
+      });
+    }
+    
+    // Convert all SVGs to PNGs
+    document.getElementById('convertAll').addEventListener('click', async () => {
+      for (const size of sizes) {
+        const svgElement = document.getElementById(`svg-${size}`);
+        await convertSVGtoPNG(svgElement, size);
+      }
+      alert('All icons converted and downloaded!');
+    });
+  </script>
+</body>
+</html>

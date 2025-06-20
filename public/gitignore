@@ -1,0 +1,19 @@
+# Ignore user config
+.gitconfig
+.lesshst
+
+# VSCode settings
+.vscode/
+UIHistory_*
+
+# Python
+*.pyc
+*.pyo
+__pycache__/
+
+# Logs
+*.log
+
+# Other common ignores
+.DS_Store
+Thumbs.db
