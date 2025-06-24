@@ -229,7 +229,7 @@
                 <div class="form-group" [class.required]="i === 0">
                   <label for="cartonNo{{i}}">Carton No</label>
                   <div class="input-with-button">
-                    <input type="text" id="cartonNo{{i}}" name="cartonNo{{i}}" class="form-control" [(ngModel)]="carton.value" [required]="i === 0">
+                    <input type="text" id="cartonNo{{i}}" name="cartonNo{{i}}" class="form-control" [(ngModel)]="carton.value" [required]="i === 0" min="0" max="999999" oninput="if(this.value.length > 6) this.value=this.value.slice(0,6)" >
                     <button *ngIf="i === spinningForm.cartons.length - 1" type="button" class="btn-icon btn-add" (click)="addCarton()">+</button>
                     <button *ngIf="i > 0" type="button" class="btn-icon btn-remove" (click)="removeCarton(i)">×</button>
                   </div>
@@ -602,8 +602,8 @@
                 <button class="grid-btn refresh-btn" title="Refresh" (click)="loadDispositions()">
                   <span class="grid-icon">⟲</span>
                 </button>
-                <button class="add-new-btn" title="Delete Selected" (click)="bulkDeleteDispositions()" [disabled]="selectedDispositions.size === 0">
-                  Delete Selected
+                <button class="" title="Delete Selected" (click)="bulkDeleteDispositions()" [disabled]="selectedDispositions.size === 0">
+                  🗑️
                 </button>
               </div>
               <div class="grid-filters">
@@ -694,9 +694,9 @@
                   </div>
                   <div class="form-group">
                     <label for="abbreviation">Abbreviation <span class="required">*</span></label>
-                    <input type="text" id="abbreviation" class="form-control" [(ngModel)]="dispositionForm.abbreviation" maxlength="10" required>
-                    <div class="error-message" *ngIf="dispositionForm.abbreviation && (dispositionForm.abbreviation.length < 1 || dispositionForm.abbreviation.length > 10)">
-                      Abbreviation must be between 1 and 10 characters.
+                    <input type="text" id="abbreviation" class="form-control" [(ngModel)]="dispositionForm.abbreviation" maxlength="5" required>
+                    <div class="error-message" *ngIf="dispositionForm.abbreviation && (dispositionForm.abbreviation.length < 1 || dispositionForm.abbreviation.length > 5)">
+                      Abbreviation must be between 1 and 5 characters.
                     </div>
                   </div>
                   <div class="form-group checkbox-group">
@@ -736,7 +736,7 @@
                   <span class="grid-icon">⟲</span>
                 </button>
                 <button class="add-new-btn" title="Delete Selected" (click)="bulkDeleteSpinningMachines()" [disabled]="selectedSpinningMachines.size === 0">
-                  Delete Selected
+                  🗑️
                 </button>
               </div>
               <div class="grid-filters">
@@ -823,7 +823,7 @@
                 <div class="form-body">
                   <div class="form-group">
                     <label for="machineName">Spinning Machine <span class="required">*</span></label>
-                    <input type="text" id="machineName" class="form-control" [(ngModel)]="spinningMachineForm.machineName" pattern="SM-([1-9][0-9]{1,2}|[1-9][0-9]{2})" title="Format must be SM-99 to SM-999" required>
+                    <input type="text" id="machineName" class="form-control" [(ngModel)]="spinningMachineForm.machineName" pattern="SM-([1-9][0-9]{1,2}|[1-9][0-9]{2})" title="Format must be SM-99 to SM-999" required value="SM-" (focus)="onMachineInputFocus($event)" (input)="onMachineInputChange($event)">
                   </div>
                   <div class="form-group">
                     <label for="description">Description</label>
