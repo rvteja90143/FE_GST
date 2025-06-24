@@ -287,7 +287,7 @@ export class AdminDashboardComponent implements OnInit {
   
   // Map of test parts to their corresponding spinning machines, threadline counts and merge values
   testPartMappings: Record<string, {spinningMachine: string, threadlines: number[], merge: number}> = {
-   'ETS_0001_Tensile': { spinningMachine: 'SM-90', threadlines: [8, 24, 25, 45,55], merge: 66090 },
+    'ETS_0001_Tensile': { spinningMachine: 'SM-90', threadlines: [8, 24, 25, 45,55], merge: 66090 },
     'ETS_0002_Elongation': { spinningMachine: 'SM-91', threadlines: [1, 3, 6, 10,15,20,25,30,35,40], merge: 64565 },
     'ETS_0003_Twist': { spinningMachine: 'SM-92', threadlines: [2, 4, 8, 12,16,20,24,28,32,36,40,44,48,52,56,60,64], merge: 64566 },
     'ETS_0004_Moisture': { spinningMachine: 'SM-93', threadlines: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20.21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64], merge: 64567 }
@@ -865,7 +865,7 @@ export class AdminDashboardComponent implements OnInit {
     }
   }
 
-  // Event handlers for Spinning Machine input with fixed SM- prefixAdd commentMore actions
+  // Event handlers for Spinning Machine input with fixed SM- prefix
   onMachineInputFocus(event: FocusEvent): void {
     const input = event.target as HTMLInputElement;
     if (!input.value || input.value === '') {
