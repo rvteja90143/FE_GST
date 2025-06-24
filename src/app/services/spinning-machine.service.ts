@@ -12,11 +12,11 @@ export class SpinningMachineService {
   
   // Mock data for development until backend is ready
   private mockMachines: SpinningMachine[] = [
-    { id: 1, machineName: 'SM1', description: 'Spinning machine 1', merge: 66090, max: 24, isActive: true },
-    { id: 2, machineName: 'SM2', description: 'Spinning machine 2', merge: 66091, max: 16, isActive: true },
-    { id: 3, machineName: 'SM3', description: 'Spinning machine 3', merge: 66092, max: 4, isActive: false },
-    { id: 4, machineName: 'SM4', description: 'Spinning machine 4', merge: 66093, max: 8, isActive: true },
-    { id: 5, machineName: 'SM5', description: 'Spinning machine 5', merge: 66095, max: 12, isActive: true }
+    { id: 1, machineName: 'SM-90', description: 'Spinning machine 1', merge: 66090, max: 24, isActive: true },
+    { id: 2, machineName: 'SM-91', description: 'Spinning machine 2', merge: 66091, max: 16, isActive: true },
+    { id: 3, machineName: 'SM-92', description: 'Spinning machine 3', merge: 66092, max: 4, isActive: false },
+    { id: 4, machineName: 'SM-93', description: 'Spinning machine 4', merge: 66093, max: 8, isActive: true },
+    { id: 5, machineName: 'SM-95', description: 'Spinning machine 5', merge: 66095, max: 12, isActive: true }
   ];
 
   constructor(private http: HttpClient) { }

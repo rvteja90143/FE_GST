@@ -1458,6 +1458,46 @@ label {
   padding-left: 5px;
 }
 
+/* Hide spinner arrows for number inputs */
+input[type="number"] {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Styling for select dropdown with arrow indicator */
+.select-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.select-wrapper::after {
+  content: '▼';
+  font-size: 0.7em;
+  color: var(--text-muted, #666);
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; /* ensures the arrow doesn't interfere with clicks */
+}
+
+.disposition-table .select-wrapper select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 25px; /* space for the custom arrow */
+  width: 100%;
+  cursor: pointer;
+}
+
 /* Checkbox styles */
 input[type="checkbox"] {
   width: 16px;
@@ -1708,4 +1748,6 @@ textarea.form-control {
       margin-bottom: 0.25rem;
     }
   }
+
+ 
 }

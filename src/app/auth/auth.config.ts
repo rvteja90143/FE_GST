@@ -32,7 +32,7 @@ export const authConfig: AuthConfig = {
   useSilentRefresh: true,
   
   // Set to true to use HTTP BASIC auth for OIDC token requests
-  requireHttps: true,
+  requireHttps: false,
   
   // Enable PKCE (Proof Key for Code Exchange) for authorization code flow
   // This is recommended for security

@@ -287,11 +287,10 @@ export class AdminDashboardComponent implements OnInit {
   
   // Map of test parts to their corresponding spinning machines, threadline counts and merge values
   testPartMappings: Record<string, {spinningMachine: string, threadlines: number[], merge: number}> = {
-    'ETS_0001_Tensile': { spinningMachine: 'SM1', threadlines: [8, 24, 25, 45], merge: 66090 },
-    'ETS_0002_Elongation': { spinningMachine: 'SM1', threadlines: [1, 3, 6, 10], merge: 64565 },
-    'ETS_0003_Twist': { spinningMachine: 'SM2', threadlines: [2, 4, 8, 12], merge: 64566 },
-    'ETS_0004_Moisture': { spinningMachine: 'SM1, SM2', threadlines: [1, 5, 10, 15, 20], merge: 64567 }
-    
+    'ETS_0001_Tensile': { spinningMachine: 'SM-90', threadlines: [8, 24, 25, 45], merge: 66090 },
+    'ETS_0002_Elongation': { spinningMachine: 'SM-91', threadlines: [1, 3, 6, 10], merge: 64565 },
+    'ETS_0003_Twist': { spinningMachine: 'SM-92', threadlines: [2, 4, 8, 12], merge: 64566 },
+    'ETS_0004_Moisture': { spinningMachine: 'SM-93', threadlines: [1, 5, 10, 15, 20], merge: 64567 }
   };
   
   // Disposition state variables
@@ -809,11 +808,36 @@ export class AdminDashboardComponent implements OnInit {
 
   // Save spinning machine
   saveSpinningMachine() {
+    // Validate machine name pattern (SM-99 to SM-999)
+    const machineNamePattern = /^SM-[1-9][0-9]{1,2}$/;
+    if (!machineNamePattern.test(this.spinningMachineForm.machineName)) {
+      this.toastr.error('Spinning Machine name must be in format SM-99 to SM-999');
+      return;
+    }
+    
+    // Validate Merge field is not empty or zero
+    if (!this.spinningMachineForm.merge || this.spinningMachineForm.merge === 0) {
+      this.toastr.error('Merge field is mandatory');
+      return;
+    }
+    
+    // Validate Max threadLine is not empty or zero
+    if (!this.spinningMachineForm.max || this.spinningMachineForm.max === 0) {
+      this.toastr.error('Max threadLine field is mandatory');
+      return;
+    }
+    
+    // Validate max threadLine (max 64)
+    if (this.spinningMachineForm.max > 64) {
+      this.toastr.error('Max threadLine cannot exceed 64');
+      return;
+    }
+    
     if (this.isAdding) {
       this.spinningMachineService.addSpinningMachine(this.spinningMachineForm).subscribe({
         next: (newMachine) => {
           this.spinningMachines.push(newMachine);
-          //this.filterAndSortSpinningMachines();
+          this.filterAndSortSpinningMachines();
           this.showSpinningMachineForm = false;
           this.toastr.success('Spinning machine added successfully');
         },
@@ -829,7 +853,7 @@ export class AdminDashboardComponent implements OnInit {
           if (index !== -1) {
             this.spinningMachines[index] = updatedMachine;
           }
-          //this.filterAndSortSpinningMachines();
+          this.filterAndSortSpinningMachines();
           this.showSpinningMachineForm = false;
           this.toastr.success('Spinning machine updated successfully');
         },

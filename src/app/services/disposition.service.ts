@@ -15,7 +15,7 @@ export class DispositionService {
     { id: 1, disposition: 'Waste', description: 'Description 1', abbreviation: 'W', isActive: true },
     { id: 2, disposition: 'Sampled', description: 'Description 2', abbreviation: 'S', isActive: true },
     { id: 3, disposition: 'Cell Break', description: 'Description 3', abbreviation: 'X', isActive: true },
-    { id: 4, disposition: 'Packed', description: 'Description 4', abbreviation: 'S', isActive: true }
+    { id: 4, disposition: 'Packed', description: 'Description 4', abbreviation: 'P', isActive: true }
   ];
 
   constructor(private http: HttpClient) { }
