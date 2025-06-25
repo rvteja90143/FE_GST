@@ -562,12 +562,12 @@ export class AdminDashboardComponent implements OnInit {
   viewRemarksHistory(): void {
     // Generate mock remarks history data
     this.remarksHistory = [
-      { date: '3/21/24 8:00 AM', shift: 'Morning Shift', operatorName: 'John Doe', remarks: 'Remarks 1' },
-      { date: '3/21/24 10:30 AM', shift: 'Morning Shift', operatorName: 'John Doe', remarks: 'Remarks 2' },
-      { date: '3/20/24 10:00 AM', shift: 'Morning Shift', operatorName: 'Lawrence', remarks: 'Remarks 3' },
-      { date: '3/20/24 1:30 PM', shift: 'Night Shift', operatorName: 'Rob', remarks: 'Remarks 4' },
-      { date: '3/19/24 10:00 AM', shift: 'Morning Shift', operatorName: 'John Doe', remarks: 'Remarks 5' },
-      { date: '3/19/24 4:00 PM', shift: 'Night Shift', operatorName: 'Rob', remarks: 'Remarks 6' }
+      { date: '6/25/25 8:00 AM', shift: 'Morning Shift', operatorName: 'John Doe', remarks: 'Remarks 1' },
+      { date: '6/25/25 10:30 AM', shift: 'Morning Shift', operatorName: 'Lawrence', remarks: 'Remarks 2' },
+      { date: '6/24/25 10:00 AM', shift: 'Morning Shift', operatorName: 'John Doe', remarks: 'Remarks 3' },
+      { date: '6/24/25 1:30 PM', shift: 'Night Shift', operatorName: 'Rob', remarks: 'Remarks 4' },
+      { date: '6/24/25 10:00 AM', shift: 'Morning Shift', operatorName: 'John Doe', remarks: 'Remarks 5' },
+      { date: '6/24/25 4:00 PM', shift: 'Night Shift', operatorName: 'Rob', remarks: 'Remarks 6' }
     ];
     
     // Show the modal
