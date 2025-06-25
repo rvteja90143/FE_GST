@@ -150,6 +150,22 @@ export class AdminDashboardComponent implements OnInit {
   currentSection = 'spinning';
   currentSubSection = 'spinning';
   
+  // Initialize the spinning form with empty cartons array
+  spinningForm: SpinningForm = {
+    shift: '',
+    testPart: '',
+    spinningMachine: '',
+    threadlineCount: '',
+    merge: 0,
+    revisionNo: '',
+    isWaste: false,
+    doffNo: '',
+    doffTime: '',
+    cartons: [{ value: '' }], // Initialize with one empty carton
+    threadLines: [],
+    remarks: ''
+  };
+  
   // History form properties
   historyForm: HistoryForm = {
     fromDate: '',
@@ -330,20 +346,7 @@ export class AdminDashboardComponent implements OnInit {
   spinningMachineSearchText = '';
   
   // Spinning Production form data
-  spinningForm: SpinningForm = {
-    shift: '',
-    testPart: '',
-    spinningMachine: '',
-    threadlineCount: '',
-    merge: 0,
-    revisionNo: '',
-    isWaste: false,
-    doffNo: '',
-    doffTime: '',
-    cartons: [{id: 1, value: ''}],
-    threadLines: [],
-    remarks: ''
-  };
+  // spinningForm is already declared earlier in the file
 
   // Validation config has been moved to class property declarations
   
@@ -554,19 +557,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   
-  addCarton(): void {
-    // Generate new ID for the carton (simple increment for this example)
-    const newId = this.spinningForm.cartons.length > 0 ? 
-      Math.max(...this.spinningForm.cartons.map(c => c.id || 0)) + 1 : 1;
-    
-    this.spinningForm.cartons.push({id: newId, value: ''});
-  }
-  
-  removeCarton(index: number): void {
-    if (index > 0 && index < this.spinningForm.cartons.length) {
-      this.spinningForm.cartons.splice(index, 1);
-    }
-  }
+  // addCarton and removeCarton methods are implemented later in the file
   
   viewRemarksHistory(): void {
     // Generate mock remarks history data
@@ -1699,10 +1690,9 @@ export class AdminDashboardComponent implements OnInit {
     } else {
       this.selectedThreadlines.delete(line);
     }
-    
-    // Update the threadline field in the form with comma-separated values
-    this.updateThreadlineField();
   }
+  
+  // Carton methods are implemented later in the file
 
   // Select or deselect all threadlines
   selectAllThreadlines(event: Event): void {
@@ -1721,6 +1711,30 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   // Update the threadline field in the form with comma-separated values
+  // Add new carton input field (max 10)
+  addCarton(): void {
+    // Check if we already have 10 cartons
+    if (this.spinningForm.cartons.length >= 10) {
+      this.toastr.warning('Maximum of 10 cartons allowed');
+      return;
+    }
+    
+    // Generate new ID for the carton if needed
+    const newId = this.spinningForm.cartons.length > 0 ? 
+      Math.max(...this.spinningForm.cartons.map(c => c.id || 0)) + 1 : 1;
+    
+    // Add a new empty carton
+    this.spinningForm.cartons.push({ id: newId, value: '' });
+  }
+  
+  // Remove a carton at the specified index
+  removeCarton(index: number): void {
+    // Make sure we always have at least one carton
+    if (this.spinningForm.cartons.length > 1) {
+      this.spinningForm.cartons.splice(index, 1);
+    }
+  }
+  
   updateThreadlineField(): void {
     if (this.selectedThreadlines.size === 0) {
       this.testForm.threadline = '';
