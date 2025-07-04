@@ -137,6 +137,10 @@ interface UserGroupForm {
   imports: [CommonModule, FormsModule, ReactiveFormsModule, ConfirmationDialogComponent]
 })
 export class AdminDashboardComponent implements OnInit {
+  // Flag to prevent multiple submissions
+  private isSubmitting = false;
+  // Track last submission to prevent duplicate processing
+  lastSubmissionId = '';
   // Pagination
   currentPage = 1;
   // Max character limits
@@ -609,7 +613,7 @@ export class AdminDashboardComponent implements OnInit {
     missingFields.push('Doff No');
   }
 
-  // Check for cartons - must have at least one carton with a value
+  // Check for cartons - must have at least one carton with a value ONLY when "Is Waste" is not checked
   let hasValidCarton = false;
   if (this.spinningForm.cartons && this.spinningForm.cartons.length > 0) {
     for (const carton of this.spinningForm.cartons) {
@@ -619,7 +623,8 @@ export class AdminDashboardComponent implements OnInit {
       }
     }
   }
-  if (!hasValidCarton) {
+  // Only require carton number when "Is Waste" is NOT checked
+  if (!hasValidCarton && !this.spinningForm.isWaste) {
     missingFields.push('Carton No');
   }
 
@@ -799,6 +804,12 @@ export class AdminDashboardComponent implements OnInit {
 
   // Save spinning machine
   saveSpinningMachine() {
+    // Prevent multiple submissions
+    if (this.isSubmitting) {
+      console.log('Preventing duplicate submission');
+      return;
+    }
+    
     // Validate machine name pattern (SM-99 to SM-999)
     const machineNamePattern = /^SM-[1-9][0-9]{1,2}$/;
     if (!machineNamePattern.test(this.spinningMachineForm.machineName)) {
@@ -824,33 +835,63 @@ export class AdminDashboardComponent implements OnInit {
       return;
     }
     
+    // Log spinning machine form data to console
+    console.log('Submitting spinning machine form:', this.spinningMachineForm);
+    
+    // Set submission flag to prevent duplicate submissions
+    this.isSubmitting = true;
+    
+    // Debounce protection - create a unique identifier for this submission
+    const currentSubmissionId = Date.now().toString();  
+    this.lastSubmissionId = currentSubmissionId;
+    
     if (this.isAdding) {
       this.spinningMachineService.addSpinningMachine(this.spinningMachineForm).subscribe({
         next: (newMachine) => {
-          this.spinningMachines.push(newMachine);
-          this.filterAndSortSpinningMachines();
-          this.showSpinningMachineForm = false;
-          this.toastr.success('Spinning machine added successfully');
+          // Only process if this is still the current submission
+          if (this.lastSubmissionId === currentSubmissionId) {
+            this.spinningMachines.push(newMachine);
+            this.filterAndSortSpinningMachines();
+            this.showSpinningMachineForm = false;
+            this.toastr.success('Spinning machine added successfully');
+            // Reset submission flag
+            this.isSubmitting = false;
+          }
         },
         error: (err) => {
-          console.error('Error adding spinning machine:', err);
-          this.toastr.error(`Error adding spinning machine: ${err.message || 'Unknown error'}`);
+          // Only process if this is still the current submission
+          if (this.lastSubmissionId === currentSubmissionId) {
+            console.error('Error adding spinning machine:', err);
+            this.toastr.error(`Error adding spinning machine: ${err.message || 'Unknown error'}`);
+            // Reset submission flag on error
+            this.isSubmitting = false;
+          }
         }
       });
     } else if (this.isEditing) {
       this.spinningMachineService.updateSpinningMachine(this.spinningMachineForm).subscribe({
         next: (updatedMachine) => {
-          const index = this.spinningMachines.findIndex(m => m.id === updatedMachine.id);
-          if (index !== -1) {
-            this.spinningMachines[index] = updatedMachine;
+          // Only process if this is still the current submission
+          if (this.lastSubmissionId === currentSubmissionId) {
+            const index = this.spinningMachines.findIndex(m => m.id === updatedMachine.id);
+            if (index !== -1) {
+              this.spinningMachines[index] = updatedMachine;
+            }
+            this.filterAndSortSpinningMachines();
+            this.showSpinningMachineForm = false;
+            this.toastr.success('Spinning machine updated successfully');
+            // Reset submission flag
+            this.isSubmitting = false;
           }
-          this.filterAndSortSpinningMachines();
-          this.showSpinningMachineForm = false;
-          this.toastr.success('Spinning machine updated successfully');
         },
         error: (err) => {
-          console.error('Error updating spinning machine:', err);
-          this.toastr.error(`Error updating spinning machine: ${err.message || 'Unknown error'}`);
+          // Only process if this is still the current submission
+          if (this.lastSubmissionId === currentSubmissionId) {
+            console.error('Error updating spinning machine:', err);
+            this.toastr.error(`Error updating spinning machine: ${err.message || 'Unknown error'}`);
+            // Reset submission flag on error
+            this.isSubmitting = false;
+          }
         }
       });
     }
