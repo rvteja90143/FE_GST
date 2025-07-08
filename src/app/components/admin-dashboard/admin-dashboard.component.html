@@ -1,13 +1,14 @@
 <div class="admin-screen">
   <!-- Add confirmation dialog component -->
   <app-confirmation-dialog></app-confirmation-dialog>
-  
+
   <!-- Remarks History Modal -->
   <div *ngIf="showRemarksHistoryModal" class="modal-overlay">
     <div class="modal-content remarks-history-modal">
       <div class="modal-header">
         <h3>Operator Remarks History</h3>
-        <button class="close-btn" (click)="closeRemarksHistoryModal()" (keydown.enter)="closeRemarksHistoryModal()" tabindex="0" aria-label="Close">&times;</button>
+        <button class="close-btn" (click)="closeRemarksHistoryModal()" (keydown.enter)="closeRemarksHistoryModal()"
+          tabindex="0" aria-label="Close">&times;</button>
       </div>
       <div class="modal-body">
         <div class="remarks-info-section">
@@ -23,7 +24,7 @@
             <div class="info-label">Remarks:</div>
           </div>
         </div>
-        
+
         <div class="remarks-table-container">
           <table class="remarks-table">
             <thead>
@@ -55,7 +56,7 @@
         </div>
         <h1 class="app-title">Benger Spinning</h1>
       </div>
-      
+
       <div class="user-info flex items-center gap-4">
         <div class="user-profile flex items-center gap-2">
           <div class="avatar">{{username.charAt(0) | uppercase}}</div>
@@ -64,12 +65,14 @@
             <span class="date text-sm text-light">{{currentDate | date:'EEEE, MMMM d, y'}}</span>
           </div>
         </div>
-        
+
         <div class="site-info flex items-center gap-2">
           <div class="site-label text-sm text-light">Site</div>
           <div class="site-name font-medium">WBO/Benger</div>
-          <button class="icon logout-icon" (click)="logout()" (keydown.enter)="logout()" tabindex="0" aria-label="Logout" title="Logout">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <button class="icon logout-icon" (click)="logout()" (keydown.enter)="logout()" tabindex="0"
+            aria-label="Logout" title="Logout">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
               <polyline points="16 17 21 12 16 7"></polyline>
               <line x1="21" y1="12" x2="9" y2="12"></line>
@@ -85,54 +88,72 @@
       <div class="sidebar-header">
         <h2 class="sidebar-title">Admin Panel</h2>
       </div>
-      
+
       <nav class="sidebar-nav">
         <!-- Main Production Section -->
-        <button class="menu-item" [class.active]="currentSection === 'spinning'" (click)="setCurrentSection('spinning')" (keydown.enter)="setCurrentSection('spinning')" tabindex="0">
+        <button class="menu-item" [class.active]="currentSection === 'spinning'" (click)="setCurrentSection('spinning')"
+          (keydown.enter)="setCurrentSection('spinning')" tabindex="0">
           <span class="menu-icon">🧵</span>
           <span class="menu-text">Spinning Production</span>
         </button>
-        
-        <button class="menu-item" [class.active]="currentSection === 'history'" (click)="setCurrentSection('history')" (keydown.enter)="setCurrentSection('history')" tabindex="0">
+
+        <button class="menu-item" [class.active]="currentSection === 'history'" (click)="setCurrentSection('history')"
+          (keydown.enter)="setCurrentSection('history')" tabindex="0">
           <span class="menu-icon">📋</span>
           <span class="menu-text">Update and View History</span>
         </button>
-        
-        <button class="menu-item" [class.active]="currentSection === 'remarks'" (click)="setCurrentSection('remarks')" (keydown.enter)="setCurrentSection('remarks')" tabindex="0">
+
+        <button class="menu-item" [class.active]="currentSection === 'remarks'" (click)="setCurrentSection('remarks')"
+          (keydown.enter)="setCurrentSection('remarks')" tabindex="0">
           <span class="menu-icon">📝</span>
           <span class="menu-text">Historical Remarks</span>
         </button>
-        
+
         <!-- Configuration Section -->
         <div class="menu-item main-menu-item">
           <span class="menu-icon">⚙️</span>
           <span class="menu-text">Configuration</span>
         </div>
-        
+
         <!-- Configuration Sub-items as direct menu items -->
-        <button class="menu-item sub-menu-item" [class.active]="currentSection === 'config' && currentSubSection === 'disposition'" (click)="setCurrentSection('config'); setCurrentSubSection('disposition')" (keydown.enter)="setCurrentSection('config'); setCurrentSubSection('disposition')" tabindex="0">
+        <button class="menu-item sub-menu-item"
+          [class.active]="currentSection === 'config' && currentSubSection === 'disposition'"
+          (click)="setCurrentSection('config'); setCurrentSubSection('disposition')"
+          (keydown.enter)="setCurrentSection('config'); setCurrentSubSection('disposition')" tabindex="0">
           <span class="menu-text sub-menu-text">Disposition</span>
         </button>
-        
-        <button class="menu-item sub-menu-item" [class.active]="currentSection === 'config' && currentSubSection === 'machine'" (click)="setCurrentSection('config'); setCurrentSubSection('machine')" (keydown.enter)="setCurrentSection('config'); setCurrentSubSection('machine')" tabindex="0">
+
+        <button class="menu-item sub-menu-item"
+          [class.active]="currentSection === 'config' && currentSubSection === 'machine'"
+          (click)="setCurrentSection('config'); setCurrentSubSection('machine')"
+          (keydown.enter)="setCurrentSection('config'); setCurrentSubSection('machine')" tabindex="0">
           <span class="menu-text sub-menu-text">Spinning Machine</span>
         </button>
-        
-        <button class="menu-item sub-menu-item" [class.active]="currentSection === 'config' && currentSubSection === 'test'" (click)="setCurrentSection('config'); setCurrentSubSection('test')" (keydown.enter)="setCurrentSection('config'); setCurrentSubSection('test')" tabindex="0">
+
+        <button class="menu-item sub-menu-item"
+          [class.active]="currentSection === 'config' && currentSubSection === 'test'"
+          (click)="setCurrentSection('config'); setCurrentSubSection('test')"
+          (keydown.enter)="setCurrentSection('config'); setCurrentSubSection('test')" tabindex="0">
           <span class="menu-text sub-menu-text">Test</span>
         </button>
-        
-        <button class="menu-item sub-menu-item" [class.active]="currentSection === 'config' && currentSubSection === 'shift'" (click)="setCurrentSection('config'); setCurrentSubSection('shift')" (keydown.enter)="setCurrentSection('config'); setCurrentSubSection('shift')" tabindex="0">
+
+        <button class="menu-item sub-menu-item"
+          [class.active]="currentSection === 'config' && currentSubSection === 'shift'"
+          (click)="setCurrentSection('config'); setCurrentSubSection('shift')"
+          (keydown.enter)="setCurrentSection('config'); setCurrentSubSection('shift')" tabindex="0">
           <span class="menu-text sub-menu-text">Shift</span>
         </button>
-        
-        <button class="menu-item sub-menu-item" [class.active]="currentSection === 'config' && currentSubSection === 'usergroup'" (click)="setCurrentSection('config'); setCurrentSubSection('usergroup')" (keydown.enter)="setCurrentSection('config'); setCurrentSubSection('usergroup')" tabindex="0">
+
+        <button class="menu-item sub-menu-item"
+          [class.active]="currentSection === 'config' && currentSubSection === 'usergroup'"
+          (click)="setCurrentSection('config'); setCurrentSubSection('usergroup')"
+          (keydown.enter)="setCurrentSection('config'); setCurrentSubSection('usergroup')" tabindex="0">
           <span class="menu-text sub-menu-text">User Group</span>
         </button>
-        
-        
+
+
       </nav>
-      
+
       <div class="sidebar-footer">
         <div class="version-info text-sm">v1.0.0</div>
       </div>
@@ -167,13 +188,14 @@
 
                 </div>
               </div>
-              
+
               <!-- Second row: Test Part, SM, TL -->
               <div class="form-row">
                 <div class="form-group required">
                   <label for="testPart">Test Part</label>
                   <div class="select-wrapper">
-                    <select id="testPart" name="testPart" class="form-control" [(ngModel)]="spinningForm.testPart" (change)="onTestPartChange()">
+                    <select id="testPart" name="testPart" class="form-control" [(ngModel)]="spinningForm.testPart"
+                      (change)="onTestPartChange()">
                       <option *ngFor="let test of tests" [value]="test.testName">{{ test.testName }}</option>
                     </select>
                     <span class="select-arrow">▼</span>
@@ -181,64 +203,76 @@
                 </div>
                 <div class="form-group">
                   <label for="sm">SM</label>
-                  <input type="text" id="sm" name="sm" class="form-control merge-input readonly-field" [(ngModel)]="spinningForm.spinningMachine" readonly>
+                  <input type="text" id="sm" name="sm" class="form-control merge-input readonly-field"
+                    [(ngModel)]="spinningForm.spinningMachine" readonly>
                 </div>
                 <div class="form-group">
                   <label for="tlCount">TL count</label>
-                  <input type="text" id="tlCount" name="tlCount" class="form-control merge-input readonly-field" [(ngModel)]="spinningForm.threadlineCount" readonly>
+                  <input type="text" id="tlCount" name="tlCount" class="form-control merge-input readonly-field"
+                    [(ngModel)]="spinningForm.threadlineCount" readonly>
                 </div>
               </div>
-              
+
               <!-- Third row: Merge, Revision No -->
               <div class="form-row">
                 <div class="form-group">
                   <label for="merge">Merge</label>
-                  <input type="number" id="merge" name="merge" class="form-control merge-input readonly-field" [(ngModel)]="spinningForm.merge" readonly>
+                  <input type="number" id="merge" name="merge" class="form-control merge-input readonly-field"
+                    [(ngModel)]="spinningForm.merge" readonly>
                 </div>
                 <div class="form-group required">
                   <label for="revisionNo">Revision No</label>
-                  <input type="number" id="revisionNo" name="revisionNo" class="form-control" [(ngModel)]="spinningForm.revisionNo" min="0" max="999999" oninput="if(this.value.length > 6) this.value=this.value.slice(0,6)" required>
+                  <input type="number" id="revisionNo" name="revisionNo" class="form-control"
+                    [(ngModel)]="spinningForm.revisionNo" min="0" max="999999"
+                    oninput="if(this.value.length > 6) this.value=this.value.slice(0,6)" required>
                 </div>
               </div>
-              
+
               <!-- Fourth row: Is Waste checkbox -->
               <div class="form-row">
                 <div class="form-group checkbox-container">
                   <div class="checkbox-wrapper">
-                    <input type="checkbox" id="isWaste" name="isWaste" [(ngModel)]="spinningForm.isWaste" (change)="onWasteChange()">
+                    <input type="checkbox" id="isWaste" name="isWaste" [(ngModel)]="spinningForm.isWaste"
+                      (change)="onWasteChange()">
                     <label for="isWaste">Is Waste</label>
                   </div>
                 </div>
               </div>
-              
+
               <!-- Fifth row: Doff No, Doff Time -->
               <div class="form-row">
                 <div class="form-group required">
                   <label for="doffNo">Doff No</label>
-                  <input type="number" id="doffNo" name="doffNo" class="form-control" [(ngModel)]="spinningForm.doffNo" min="0" max="999999" oninput="if(this.value.length > 6) this.value=this.value.slice(0,6)" required>
+                  <input type="number" id="doffNo" name="doffNo" class="form-control" [(ngModel)]="spinningForm.doffNo"
+                    min="0" max="999999" oninput="if(this.value.length > 6) this.value=this.value.slice(0,6)" required>
                 </div>
                 <div class="form-group required">
                   <label for="doffTime">Doff Time</label>
-                  <input type="time" id="doffTime" name="doffTime" class="form-control time-24" [(ngModel)]="spinningForm.doffTime" min="00:00" max="23:59" step="60" required>
-                  
+                  <input type="time" id="doffTime" name="doffTime" class="form-control time-24"
+                    [(ngModel)]="spinningForm.doffTime" min="00:00" max="23:59" step="60" required>
+
                 </div>
               </div>
-              
+
               <!-- Carton No with add/remove -->
               <div class="form-row" *ngFor="let carton of spinningForm.cartons; let i = index">
                 <div class="form-group" [class.required]="i === 0">
                   <label for="cartonNo{{i}}">Carton No</label>
                   <div class="input-with-button">
-                    <input type="text" id="cartonNo{{i}}" name="cartonNo{{i}}" class="form-control" [(ngModel)]="carton.value" [required]="i === 0" min="0" max="999999" oninput="if(this.value.length > 100) this.value=this.value.slice(1,100)" >
-                    <button *ngIf="i === spinningForm.cartons.length - 1 && spinningForm.cartons.length < 10" type="button" class="btn-icon btn-add" (click)="addCarton()">+</button>
-                    <button *ngIf="i === spinningForm.cartons.length - 1 && spinningForm.cartons.length >= 10" type="button" class="btn-icon btn-add" disabled title="Maximum of 10 cartons allowed">+</button>
+                    <input type="text" id="cartonNo{{i}}" name="cartonNo{{i}}" class="form-control"
+                      [(ngModel)]="carton.value" [required]="i === 0" min="0" max="999999"
+                      oninput="if(this.value.length > 100) this.value=this.value.slice(1,100)">
+                    <button *ngIf="i === spinningForm.cartons.length - 1 && spinningForm.cartons.length < 10"
+                      type="button" class="btn-icon btn-add" (click)="addCarton()">+</button>
+                    <button *ngIf="i === spinningForm.cartons.length - 1 && spinningForm.cartons.length >= 10"
+                      type="button" class="btn-icon btn-add" disabled title="Maximum of 10 cartons allowed">+</button>
                     <button *ngIf="i > 0" type="button" class="btn-icon btn-remove" (click)="removeCarton(i)">×</button>
                   </div>
                 </div>
 
                 <div class="form-group"> </div>
               </div>
-              
+
               <!-- Disposition Table -->
               <h3 class="section-subtitle disposition-title">Disposition Table</h3>
               <div class="table-container">
@@ -261,22 +295,25 @@
                         </div>
                       </td>
                       <td>
-                        <input type="text" class="form-control" [(ngModel)]="threadLine.comment" [name]="'threadLineComment' + i">
+                        <input type="text" class="form-control" [(ngModel)]="threadLine.comment"
+                          [name]="'threadLineComment' + i">
                       </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-              
+
               <!-- Remarks -->
               <div class="form-row">
                 <div class="form-group required remarks-group">
                   <label for="remarks">Remarks</label>
-                  <textarea id="remarks" name="remarks" class="form-control" rows="4" [(ngModel)]="spinningForm.remarks" placeholder="This is required only with operator remarks"></textarea>
-                  <button type="button" class="btn-secondary remarks-history" (click)="viewRemarksHistory()">Operator Remarks History</button>
+                  <textarea id="remarks" name="remarks" class="form-control" rows="4" [(ngModel)]="spinningForm.remarks"
+                    placeholder="This is required only with operator remarks"></textarea>
+                  <button type="button" class="btn-secondary remarks-history" (click)="viewRemarksHistory()">Operator
+                    Remarks History</button>
                 </div>
               </div>
-              
+
               <!-- Form Actions -->
               <div class="form-actions">
                 <button type="submit" class="btn-primary" (click)="submitSpinningForm()">Submit</button>
@@ -286,7 +323,7 @@
           </div>
         </div>
       </div>
-      
+
       <!-- History Section - Update and View History -->
       <div *ngIf="currentSection === 'history'" class="section">
         <div class="section-header">
@@ -308,7 +345,8 @@
                 <div class="history-form-row">
                   <div class="history-form-group">
                     <label for="fromDate">From Date</label>
-                    <input type="date" id="fromDate" name="fromDate" class="form-control" [(ngModel)]="historyForm.fromDate">
+                    <input type="date" id="fromDate" name="fromDate" class="form-control"
+                      [(ngModel)]="historyForm.fromDate">
                   </div>
                   <div class="history-form-group">
                     <label for="toDate">To Date</label>
@@ -317,7 +355,8 @@
                   <div class="history-form-group">
                     <label for="historyShift">Shift</label>
                     <div class="select-wrapper">
-                      <select id="historyShift" name="historyShift" class="form-control" [(ngModel)]="historyForm.shift">
+                      <select id="historyShift" name="historyShift" class="form-control"
+                        [(ngModel)]="historyForm.shift">
                         <option value="Night Shift">Night Shift</option>
                         <option value="Morning Shift">Morning Shift</option>
                         <option value="Day Shift">Day Shift</option>
@@ -327,9 +366,10 @@
                   </div>
                   <div class="history-form-group">
                     <label for="historyMerge">Merge</label>
-                    <input type="number" id="historyMerge" name="historyMerge" class="form-control" [(ngModel)]="historyForm.merge" value="60000">
+                    <input type="number" id="historyMerge" name="historyMerge" class="form-control"
+                      [(ngModel)]="historyForm.merge" value="60000">
                   </div>
-                
+
                 </div>
 
                 <!-- Second row -->
@@ -337,7 +377,8 @@
                   <div class="history-form-group">
                     <label for="historyTestPart">Test Part</label>
                     <div class="select-wrapper">
-                      <select id="historyTestPart" name="historyTestPart" class="form-control" [(ngModel)]="historyForm.testPart">
+                      <select id="historyTestPart" name="historyTestPart" class="form-control"
+                        [(ngModel)]="historyForm.testPart">
                         <option value="ET5_0000_MDLR1">ET5_0000_MDLR1</option>
                         <option *ngFor="let test of tests" [value]="test.testName">{{ test.testName }}</option>
                       </select>
@@ -346,22 +387,25 @@
                   </div>
                   <div class="history-form-group">
                     <label for="historyRevNo">Rev No</label>
-                    <input type="text" id="historyRevNo" name="historyRevNo" class="form-control" [(ngModel)]="historyForm.revNo" value="0">
+                    <input type="text" id="historyRevNo" name="historyRevNo" class="form-control"
+                      [(ngModel)]="historyForm.revNo" value="0">
                   </div>
-                   <div class="history-form-group">
-                      <label for="historyDoffNo">Doff No</label>
-                      <input type="text" id="historyDoffNo" name="historyDoffNo" class="form-control" [(ngModel)]="historyForm.doffNo">
-                    </div>
+                  <div class="history-form-group">
+                    <label for="historyDoffNo">Doff No</label>
+                    <input type="text" id="historyDoffNo" name="historyDoffNo" class="form-control"
+                      [(ngModel)]="historyForm.doffNo">
+                  </div>
                 </div>
 
                 <!-- Third row -->
                 <div class="history-form-row last-row">
-                   
+
                   <div class="history-form-group carton-field">
                     <label for="historyCartonNo">Carton No</label>
-                    <input type="text" id="historyCartonNo" name="historyCartonNo" class="form-control" [(ngModel)]="historyForm.cartonNo" value="333222">
+                    <input type="text" id="historyCartonNo" name="historyCartonNo" class="form-control"
+                      [(ngModel)]="historyForm.cartonNo" value="333222">
                   </div>
-                 
+
                 </div>
                 <div class="history-form-row last-row">
                   <div class="history-buttons">
@@ -372,7 +416,7 @@
               </div>
             </div>
 
-          
+
             <!-- History Data Table -->
             <div class="table-container" *ngIf="historyItems.length > 0">
               <table class="data-table">
@@ -401,10 +445,14 @@
                     <td>{{item.revNo}}</td>
                     <td>{{item.doffNo}}</td>
                     <td>{{item.doffTime}}</td>
-                    <td [ngClass]="{'bg-success': item.threadline1 === 'S', 'bg-warning': item.threadline1 === 'W'}">{{item.threadline1}}</td>
-                    <td [ngClass]="{'bg-success': item.threadline2 === 'S', 'bg-warning': item.threadline2 === 'W'}">{{item.threadline2}}</td>
-                    <td [ngClass]="{'bg-success': item.threadline3 === 'S', 'bg-warning': item.threadline3 === 'W'}">{{item.threadline3}}</td>
-                    <td [ngClass]="{'bg-success': item.threadline4 === 'S', 'bg-warning': item.threadline4 === 'W'}">{{item.threadline4}}</td>
+                    <td [ngClass]="{'bg-success': item.threadline1 === 'S', 'bg-warning': item.threadline1 === 'W'}">
+                      {{item.threadline1}}</td>
+                    <td [ngClass]="{'bg-success': item.threadline2 === 'S', 'bg-warning': item.threadline2 === 'W'}">
+                      {{item.threadline2}}</td>
+                    <td [ngClass]="{'bg-success': item.threadline3 === 'S', 'bg-warning': item.threadline3 === 'W'}">
+                      {{item.threadline3}}</td>
+                    <td [ngClass]="{'bg-success': item.threadline4 === 'S', 'bg-warning': item.threadline4 === 'W'}">
+                      {{item.threadline4}}</td>
                     <td>{{item.remarks}}</td>
                   </tr>
                 </tbody>
@@ -454,25 +502,28 @@
                   <div class="filter-group">
                     <label for="remarkFilterFrom">From Date</label>
                     <div class="date-input-wrapper">
-                      <input id="remarkFilterFrom" type="date" class="form-control" [(ngModel)]="remarkFilterFrom" placeholder="MM/DD/YYYY">
+                      <input id="remarkFilterFrom" type="date" class="form-control" [(ngModel)]="remarkFilterFrom"
+                        placeholder="MM/DD/YYYY">
                     </div>
                   </div>
-                  
+
                   <div class="filter-group">
                     <label for="remarkFilterTo">To Date</label>
                     <div class="date-input-wrapper">
-                      <input id="remarkFilterTo" type="date" class="form-control" [(ngModel)]="remarkFilterTo" placeholder="MM/DD/YYYY">
+                      <input id="remarkFilterTo" type="date" class="form-control" [(ngModel)]="remarkFilterTo"
+                        placeholder="MM/DD/YYYY">
                     </div>
                   </div>
-                  
+
                   <div class="filter-actions">
                     <button type="button" class="btn btn-primary" (click)="searchRemarksHistory()">Submit</button>
-                    <button type="button" class="btn btn-secondary" (click)="resetRemarksHistorySearch()">Cancel</button>
+                    <button type="button" class="btn btn-secondary"
+                      (click)="resetRemarksHistorySearch()">Cancel</button>
                   </div>
                 </div>
               </div>
             </div>
-            
+
             <!-- Remarks Table -->
             <div class="remarks-table-container">
               <table class="remarks-table">
@@ -547,7 +598,7 @@
           </div>
         </div>
       </div>
-      
+
       <!-- User Management Section -->
       <div *ngIf="currentSection === 'users'" class="section">
         <div class="section-header">
@@ -563,7 +614,7 @@
           </div>
         </div>
       </div>
-      
+
       <!-- Reports Section -->
       <div *ngIf="currentSection === 'reports'" class="section">
         <div class="section-header">
@@ -579,16 +630,16 @@
           </div>
         </div>
       </div>
-      
+
       <!-- Configuration Section -->
       <div *ngIf="currentSection === 'config'" class="config-section">
         <div class="section-header">
           <h2 class="section-title">Configuration</h2>
           <p class="section-subtitle">Manage system settings and preferences</p>
         </div>
-        
 
-        
+
+
         <!-- Disposition Configuration Tab -->
         <div *ngIf="currentSubSection === 'disposition'" class="card config-card">
           <div class="card-header">
@@ -605,17 +656,14 @@
                 <button class="grid-btn refresh-btn" title="Refresh" (click)="loadDispositions()">
                   <span class="grid-icon">⟲</span>
                 </button>
-                <button class="" title="Delete Selected" (click)="bulkDeleteDispositions()" [disabled]="selectedDispositions.size === 0">
+                <button class="" title="Delete Selected" (click)="bulkDeleteDispositions()"
+                  [disabled]="selectedDispositions.size === 0">
                   🗑️
                 </button>
               </div>
               <div class="grid-filters">
-                <input 
-                  type="text" 
-                  placeholder="Search dispositions..." 
-                  class="search-input"
-                  [(ngModel)]="dispositionSearchText"
-                  (input)="filterDispositions()">
+                <input type="text" placeholder="Search dispositions..." class="search-input"
+                  [(ngModel)]="dispositionSearchText" (input)="filterDispositions()">
               </div>
             </div>
 
@@ -624,7 +672,8 @@
               <table class="data-table">
                 <thead>
                   <tr>
-                    <th><input type="checkbox" [checked]="selectAllDispositions" (change)="onSelectAllDispositions($event)"></th>
+                    <th><input type="checkbox" [checked]="selectAllDispositions"
+                        (change)="onSelectAllDispositions($event)"></th>
                     <th (click)="sortDispositions('disposition')" class="sortable">
                       Disposition
                       <span class="sort-icon" *ngIf="sortField === 'disposition'">
@@ -654,7 +703,8 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let item of filteredDispositions">
-                    <td><input type="checkbox" [checked]="isDispositionSelected(item.id)" (change)="onSelectDisposition(item.id, $event)"></td>
+                    <td><input type="checkbox" [checked]="isDispositionSelected(item.id)"
+                        (change)="onSelectDisposition(item.id, $event)"></td>
                     <td>{{item.disposition}}</td>
                     <td>{{item.description}}</td>
                     <td>{{item.abbreviation}}</td>
@@ -686,8 +736,10 @@
                 <div class="form-body">
                   <div class="form-group">
                     <label for="disposition">Disposition <span class="required">*</span></label>
-                    <input type="text" id="disposition" class="form-control" [(ngModel)]="dispositionForm.disposition" maxlength="{{MAX_DISPOSITION_LENGTH}}" required>
-                    <div class="error-message" *ngIf="dispositionForm.disposition && dispositionForm.disposition.length > MAX_DISPOSITION_LENGTH">
+                    <input type="text" id="disposition" class="form-control" [(ngModel)]="dispositionForm.disposition"
+                      maxlength="{{MAX_DISPOSITION_LENGTH}}" required>
+                    <div class="error-message"
+                      *ngIf="dispositionForm.disposition && dispositionForm.disposition.length > MAX_DISPOSITION_LENGTH">
                       Disposition cannot exceed {{MAX_DISPOSITION_LENGTH}} characters.
                     </div>
                   </div>
@@ -697,8 +749,10 @@
                   </div>
                   <div class="form-group">
                     <label for="abbreviation">Abbreviation <span class="required">*</span></label>
-                    <input type="text" id="abbreviation" class="form-control" [(ngModel)]="dispositionForm.abbreviation" maxlength="5" required>
-                    <div class="error-message" *ngIf="dispositionForm.abbreviation && (dispositionForm.abbreviation.length < 1 || dispositionForm.abbreviation.length > 5)">
+                    <input type="text" id="abbreviation" class="form-control" [(ngModel)]="dispositionForm.abbreviation"
+                      maxlength="5" required>
+                    <div class="error-message"
+                      *ngIf="dispositionForm.abbreviation && (dispositionForm.abbreviation.length < 1 || dispositionForm.abbreviation.length > 5)">
                       Abbreviation must be between 1 and 5 characters.
                     </div>
                   </div>
@@ -721,7 +775,7 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Spinning Machine Configuration Tab -->
         <div *ngIf="currentSubSection === 'machine'" class="card config-card">
           <div class="card-header">
@@ -729,7 +783,7 @@
           </div>
           <div class="card-body">
             <!-- Toolbar with Add, Refresh, Delete buttons and Search (styled exactly like Disposition) -->
-             <div class="grid-controls">
+            <div class="grid-controls">
               <div class="grid-actions">
                 <button class="add-new-btn" (click)="addSpinningMachine()">
                   <span class="btn-icon">+</span>
@@ -738,26 +792,24 @@
                 <button class="grid-btn refresh-btn" title="Refresh" (click)="loadSpinningMachines()">
                   <span class="grid-icon">⟲</span>
                 </button>
-                <button class="add-new-btn" title="Delete Selected" (click)="bulkDeleteSpinningMachines()" [disabled]="selectedSpinningMachines.size === 0">
+                <button class="add-new-btn" title="Delete Selected" (click)="bulkDeleteSpinningMachines()"
+                  [disabled]="selectedSpinningMachines.size === 0">
                   🗑️
                 </button>
               </div>
               <div class="grid-filters">
-                <input 
-                  type="text" 
-                  placeholder="Search spinning machines..." 
-                  class="search-input"
-                  [(ngModel)]="spinningMachineSearchText"
-                  (input)="filterAndSortSpinningMachines()">
+                <input type="text" placeholder="Search spinning machines..." class="search-input"
+                  [(ngModel)]="spinningMachineSearchText" (input)="filterAndSortSpinningMachines()">
               </div>
             </div>
-            
+
             <!-- Spinning Machine Table -->
             <div class="table-container">
               <table class="data-table">
                 <thead>
                   <tr>
-                    <th><input type="checkbox" [checked]="selectAllSpinningMachines" (change)="onSelectAllSpinningMachines($event)"></th>
+                    <th><input type="checkbox" [checked]="selectAllSpinningMachines"
+                        (change)="onSelectAllSpinningMachines($event)"></th>
                     <th (click)="sortSpinningMachines('machineName')" class="sortable">
                       Spinning Machine
                       <span class="sort-icon" *ngIf="sortField === 'machineName'">
@@ -793,7 +845,8 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let machine of filteredSpinningMachines">
-                    <td><input type="checkbox" [checked]="isSpinningMachineSelected(machine.id)" (change)="onSelectSpinningMachine(machine.id, $event)"></td>
+                    <td><input type="checkbox" [checked]="isSpinningMachineSelected(machine.id)"
+                        (change)="onSelectSpinningMachine(machine.id, $event)"></td>
                     <td>{{machine.machineName}}</td>
                     <td>{{machine.description}}</td>
                     <td>{{machine.merge}}</td>
@@ -815,7 +868,7 @@
                 </tbody>
               </table>
             </div>
-            
+
             <!-- Form overlay for adding/editing spinning machine -->
             <div class="form-overlay" *ngIf="showSpinningMachineForm">
               <div class="form-container">
@@ -826,19 +879,27 @@
                 <div class="form-body">
                   <div class="form-group">
                     <label for="machineName">Spinning Machine <span class="required">*</span></label>
-                    <input type="text" id="machineName" class="form-control" [(ngModel)]="spinningMachineForm.machineName" pattern="SM-([1-9][0-9]{1,2}|[1-9][0-9]{2})" title="Format must be SM-99 to SM-999" required value="SM-" (focus)="onMachineInputFocus($event)" (input)="onMachineInputChange($event)">
+                    <input type="text" id="machineName" class="form-control"
+                      [(ngModel)]="spinningMachineForm.machineName" pattern="SM-([1-9][0-9]{1,2}|[1-9][0-9]{2})"
+                      title="Format must be SM-99 to SM-999" required value="SM-" (focus)="onMachineInputFocus($event)"
+                      (input)="onMachineInputChange($event)">
                   </div>
                   <div class="form-group">
                     <label for="description">Description</label>
-                    <input type="text" id="description" class="form-control" [(ngModel)]="spinningMachineForm.description">
+                    <input type="text" id="description" class="form-control"
+                      [(ngModel)]="spinningMachineForm.description">
                   </div>
                   <div class="form-group">
                     <label for="merge">Merge <span class="required">*</span></label>
-                    <input type="number" id="merge" class="form-control" [(ngModel)]="spinningMachineForm.merge" placeholder="Enter merge value" min="0" max="999999" oninput="if(this.value.length > 6) this.value=this.value.slice(0,6)" required>
+                    <input type="number" id="merge" class="form-control" [(ngModel)]="spinningMachineForm.merge"
+                      placeholder="Enter merge value" min="0" max="999999"
+                      oninput="if(this.value.length > 6) this.value=this.value.slice(0,6)" required>
                   </div>
                   <div class="form-group">
                     <label for="max">Max threadLine <span class="required">*</span></label>
-                    <input type="number" id="max" class="form-control" [(ngModel)]="spinningMachineForm.max" max="64" placeholder="Enter max threadLine value" oninput="if(this.value > 64) this.value='64';" title="Max threadLine cannot exceed 64" required>
+                    <input type="number" id="max" class="form-control" [(ngModel)]="spinningMachineForm.max" max="64"
+                      placeholder="Enter max threadLine value" oninput="if(this.value > 64) this.value='64';"
+                      title="Max threadLine cannot exceed 64" required>
                   </div>
                   <div class="form-group">
                     <label for="isActive">Is Active</label>
@@ -855,7 +916,7 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Shift Configuration Tab -->
         <div *ngIf="currentSubSection === 'shift'" class="card config-card">
           <div class="card-header">
@@ -863,7 +924,7 @@
           </div>
           <div class="card-body">
             <!-- Grid Controls -->
-            <div class="grid-controls">
+            <!--<div class="grid-controls">
               <div class="grid-actions">
                 <button class="add-new-btn" (click)="addShift()">
                   <span class="btn-icon">+</span>
@@ -872,7 +933,7 @@
                 <button class="grid-btn refresh-btn" title="Refresh" (click)="loadShifts()">
                   <span class="grid-icon">⟲</span>
                 </button>
-              </div>
+              </div> 
               <div class="grid-filters">
                 <input 
                   type="text" 
@@ -881,8 +942,8 @@
                   [(ngModel)]="shiftSearchText"
                   (input)="filterShifts()">
               </div>
-            </div>
-            
+            </div> -->
+
             <!-- Form overlay for adding/editing shift -->
             <div class="form-overlay" *ngIf="isAdding || isEditing">
               <div class="form-container">
@@ -896,12 +957,17 @@
                     <input type="text" id="shiftName" class="form-control" [(ngModel)]="shiftForm.name" required>
                   </div>
                   <div class="form-group">
+                    <label for="description">Description <span class="required">*</span></label>
+                    <input type="text" id="description" class="form-control" [(ngModel)]="shiftForm.description"
+                      required>
+                  </div>
+                  <div class="form-group">
                     <label for="startTime">Start Time <span class="required">*</span></label>
-                    <input type="time" id="startTime" class="form-control" [(ngModel)]="shiftForm.startTime" required>
+                    <input type="text" id="startTime" class="form-control" [(ngModel)]="shiftForm.startTime" required>
                   </div>
                   <div class="form-group">
                     <label for="endTime">End Time <span class="required">*</span></label>
-                    <input type="time" id="endTime" class="form-control" [(ngModel)]="shiftForm.endTime" required>
+                    <input type="text" id="endTime" class="form-control" [(ngModel)]="shiftForm.endTime" required>
                   </div>
                   <div class="form-group">
                     <label for="shiftActive">Status</label>
@@ -917,13 +983,14 @@
                 </div>
               </div>
             </div>
-            
+
             <!-- Shift data table -->
             <div *ngIf="!isAdding && !isEditing" class="table-container">
               <table class="data-table">
                 <thead>
                   <tr>
                     <th>Shift Name</th>
+                    <th>Description</th>
                     <th>Start Time</th>
                     <th>End Time</th>
                     <th>Status</th>
@@ -933,6 +1000,7 @@
                 <tbody>
                   <tr *ngFor="let shift of shifts">
                     <td>{{shift.name}}</td>
+                    <td>{{shift.description}}</td>
                     <td>{{shift.startTime}}</td>
                     <td>{{shift.endTime}}</td>
                     <td>
@@ -943,7 +1011,7 @@
                     <td>
                       <div class="action-buttons">
                         <button class="action-btn edit-btn" title="Edit" (click)="editShift(shift)">✏️</button>
-                        <button class="action-btn delete-btn" title="Delete" (click)="deleteShift(shift.id || 0)">🗑️</button>
+                        <!-- <button class="action-btn delete-btn" title="Delete" (click)="deleteShift(shift.id || 0)">🗑️</button> -->
                       </div>
                     </td>
                   </tr>
@@ -955,7 +1023,7 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Test Configuration Tab -->
         <div *ngIf="currentSubSection === 'test'" class="card config-card">
           <div class="card-header">
@@ -972,20 +1040,17 @@
                 <button class="grid-btn refresh-btn" title="Refresh" (click)="loadTests()">
                   <span class="grid-icon">⟲</span>
                 </button>
-                <button class="add-new-btn" title="Delete Selected" (click)="bulkDeleteTests()" [disabled]="selectedTests.size === 0">
+                <button class="add-new-btn" title="Delete Selected" (click)="bulkDeleteTests()"
+                  [disabled]="selectedTests.size === 0">
                   Delete Selected
                 </button>
               </div>
               <div class="grid-filters">
-                <input 
-                  type="text" 
-                  placeholder="Search tests..." 
-                  class="search-input"
-                  [(ngModel)]="testSearchTerm"
+                <input type="text" placeholder="Search tests..." class="search-input" [(ngModel)]="testSearchTerm"
                   (input)="filterAndSortTests()">
               </div>
             </div>
-            
+
             <!-- Test data table -->
             <div class="table-container">
               <table class="data-table">
@@ -1006,7 +1071,8 @@
                 <tbody>
                   <tr *ngFor="let test of filteredTests">
                     <td class="checkbox-column">
-                      <input type="checkbox" [checked]="isTestSelected(test.id)" (change)="onSelectTest(test.id, $event)">
+                      <input type="checkbox" [checked]="isTestSelected(test.id)"
+                        (change)="onSelectTest(test.id, $event)">
                     </td>
                     <td>{{test.testName}}</td>
                     <td>{{test.description}}</td>
@@ -1021,7 +1087,7 @@
                     <td>
                       <div class="action-buttons">
                         <button class="action-btn edit-btn" title="Edit" (click)="editTest(test)">✏️</button>
-                       
+
                       </div>
                     </td>
                   </tr>
@@ -1031,67 +1097,67 @@
                 </tbody>
               </table>
             </div>
-            
-            <!-- CSS for multiselect dropdown -->
-<style>
-  .dropdown-container {
-    position: relative;
-    width: 100%;
-  }
-  
-  .selected-display {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 12px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    background-color: #fff;
-    cursor: pointer;
-    min-height: 38px;
-  }
-  
-  .dropdown-arrow {
-    margin-left: 10px;
-  }
-  
-  .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    max-height: 200px;
-    overflow-y: auto;
-    background-color: #fff;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    z-index: 1000;
-  }
-  
-  .dropdown-item {
-    padding: 8px 12px;
-    cursor: pointer;
-  }
-  
-  .dropdown-item:hover {
-    background-color: #f8f9fa;
-  }
-  
-  .dropdown-item label {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    margin: 0;
-    cursor: pointer;
-  }
-  
-  .dropdown-item input[type="checkbox"] {
-    margin-right: 8px;
-  }
-</style>
 
-<!-- Form overlay for adding/editing test -->
+            <!-- CSS for multiselect dropdown -->
+            <style>
+              .dropdown-container {
+                position: relative;
+                width: 100%;
+              }
+
+              .selected-display {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 8px 12px;
+                border: 1px solid #ced4da;
+                border-radius: 4px;
+                background-color: #fff;
+                cursor: pointer;
+                min-height: 38px;
+              }
+
+              .dropdown-arrow {
+                margin-left: 10px;
+              }
+
+              .dropdown-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                max-height: 200px;
+                overflow-y: auto;
+                background-color: #fff;
+                border: 1px solid #ced4da;
+                border-radius: 4px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+              }
+
+              .dropdown-item {
+                padding: 8px 12px;
+                cursor: pointer;
+              }
+
+              .dropdown-item:hover {
+                background-color: #f8f9fa;
+              }
+
+              .dropdown-item label {
+                display: flex;
+                align-items: center;
+                width: 100%;
+                margin: 0;
+                cursor: pointer;
+              }
+
+              .dropdown-item input[type="checkbox"] {
+                margin-right: 8px;
+              }
+            </style>
+
+            <!-- Form overlay for adding/editing test -->
             <div class="form-overlay" *ngIf="testFormVisible">
               <div class="form-container">
                 <div class="form-header">
@@ -1101,18 +1167,22 @@
                 <div class="form-body">
                   <div class="form-group">
                     <label for="testName">Test <span class="required">*</span></label>
-                    <input type="text" id="testName" class="form-control" [(ngModel)]="testForm.testName" required [placeholder]="'ETS_0000_Text'">
+                    <input type="text" id="testName" class="form-control" [(ngModel)]="testForm.testName" required
+                      [placeholder]="'ETS_0000_Text'">
                   </div>
                   <div class="form-group">
                     <label for="testDescription">Description <span class="required">*</span></label>
-                    <input type="text" id="testDescription" class="form-control" [(ngModel)]="testForm.description" required>
+                    <input type="text" id="testDescription" class="form-control" [(ngModel)]="testForm.description"
+                      required>
                   </div>
                   <div class="form-group">
                     <label for="spinningMachine">Spinning Machine <span class="required">*</span></label>
                     <div class="select-wrapper">
-                      <select id="spinningMachine" class="form-control" [(ngModel)]="testForm.spinningMachine" (change)="onSpinningMachineChange()">
+                      <select id="spinningMachine" class="form-control" [(ngModel)]="testForm.spinningMachine"
+                        (change)="onSpinningMachineChange()">
                         <option value="">Select a Spinning Machine</option>
-                        <option *ngFor="let machine of spinningMachines" [value]="machine.machineName">{{ machine.machineName }}</option>
+                        <option *ngFor="let machine of spinningMachines" [value]="machine.machineName">{{
+                          machine.machineName }}</option>
                       </select>
                       <span class="select-arrow">▼</span>
                     </div>
@@ -1120,21 +1190,23 @@
                   <div class="form-group">
                     <label for="threadline">Threadline</label>
                     <div class="dropdown-container" *ngIf="availableThreadlines.length > 0">
-                      <button type="button" class="selected-display" (click)="toggleThreadlineDropdown()" (keydown.enter)="toggleThreadlineDropdown()" (keydown.space)="toggleThreadlineDropdown()" tabindex="0" aria-label="Select threadlines dropdown">
+                      <button type="button" class="selected-display" (click)="toggleThreadlineDropdown()"
+                        (keydown.enter)="toggleThreadlineDropdown()" (keydown.space)="toggleThreadlineDropdown()"
+                        tabindex="0" aria-label="Select threadlines dropdown">
                         {{ testForm.threadline || 'Select threadlines' }}
                         <span class="dropdown-arrow">▼</span>
                       </button>
                       <div class="dropdown-menu" *ngIf="showThreadlineDropdown">
                         <div class="dropdown-item">
                           <label>
-                            <input type="checkbox" (change)="selectAllThreadlines($event)" [checked]="areAllThreadlinesSelected()">
+                            <input type="checkbox" (change)="selectAllThreadlines($event)"
+                              [checked]="areAllThreadlinesSelected()">
                             Select All
                           </label>
                         </div>
                         <div class="dropdown-item" *ngFor="let line of availableThreadlines">
                           <label>
-                            <input type="checkbox" [value]="line" 
-                              [checked]="isThreadlineSelected(line)" 
+                            <input type="checkbox" [value]="line" [checked]="isThreadlineSelected(line)"
                               (change)="toggleThreadlineSelection(line, $event)">
                             {{ line }}
                           </label>
@@ -1147,7 +1219,8 @@
                   </div>
                   <div class="form-group">
                     <label for="expirationDate">Expiration date <span class="required">*</span></label>
-                    <input type="date" id="expirationDate" class="form-control" [(ngModel)]="testForm.expirationDate" required>
+                    <input type="date" id="expirationDate" class="form-control" [(ngModel)]="testForm.expirationDate"
+                      required>
                   </div>
                 </div>
                 <div class="form-footer">
@@ -1158,19 +1231,21 @@
             </div>
           </div>
         </div>
-        
+
         <!-- User Group Configuration Tab -->
         <div *ngIf="currentSubSection === 'usergroup'" class="card config-card">
           <div class="card-header">
             <h3 class="card-title">User Group Configuration</h3>
           </div>
           <div class="card-body">
-            <div class="grid-toolbar">
-              <button class="add-new-btn" title="Add New" (click)="addUserGroup()"><span class="btn-icon">+</span>Add New Shift</button>
-                
-              <button class="grid-btn" title="Refresh" (click)="loadUserGroups()"><span class="grid-icon">⟲</span></button>
-            </div>
-            
+            <!-- <div class="grid-toolbar">
+              <button class="add-new-btn" title="Add New" (click)="addUserGroup()"><span class="btn-icon">+</span>Add
+                New Shift</button>
+
+              <button class="grid-btn" title="Refresh" (click)="loadUserGroups()"><span
+                  class="grid-icon">⟲</span></button>
+            </div> -->
+
             <!-- Form for adding/editing user group -->
             <div *ngIf="isAdding || isEditing" class="edit-form">
               <h4>{{ isAdding ? 'Add New' : 'Edit' }} User Group</h4>
@@ -1180,13 +1255,16 @@
               </div>
               <div class="form-group">
                 <label for="groupDescription">Description</label>
-                <textarea id="groupDescription" class="form-control" [(ngModel)]="userGroupForm.description" required></textarea>
+                <textarea id="groupDescription" class="form-control" [(ngModel)]="userGroupForm.description"
+                  required></textarea>
               </div>
               <div class="form-group">
-                <label id="permissions-group-label" for="permissions-group">Permissions</label>
-                <div id="permissions-group" class="checkbox-group" aria-labelledby="permissions-group-label" role="group">
+                <label id="permissions-group-label" for="permissions-group">Group Members</label>
+                <div id="permissions-group" class="checkbox-group" aria-labelledby="permissions-group-label"
+                  role="group">
                   <div *ngFor="let permission of availablePermissions" class="checkbox-item">
-                    <input type="checkbox" [id]="'perm_' + permission" [checked]="hasPermission(permission)" (change)="togglePermission(permission)">
+                    <input type="checkbox" [id]="'perm_' + permission" [checked]="hasPermission(permission)"
+                      (change)="togglePermission(permission)">
                     <label [for]="'perm_' + permission">{{ permission | titlecase }}</label>
                   </div>
                 </div>
@@ -1203,7 +1281,7 @@
                 <button class="btn-primary" (click)="saveUserGroup()">Save</button>
               </div>
             </div>
-            
+
             <!-- User Group data table -->
             <div *ngIf="!isAdding && !isEditing" class="table-container">
               <table class="data-table">
@@ -1211,7 +1289,7 @@
                   <tr>
                     <th>Group Name</th>
                     <th>Description</th>
-                    <th>Permissions</th>
+                    <th>Group Members</th>
                     <th>Status</th>
                     <th>Actions</th>
                   </tr>
@@ -1233,7 +1311,8 @@
                     <td>
                       <div class="action-buttons">
                         <button class="action-btn edit-btn" title="Edit" (click)="editUserGroup(group)">✏️</button>
-                        <button class="action-btn delete-btn" title="Delete" (click)="deleteUserGroup(group.id || 0)">🗑️</button>
+                        <!-- <button class="action-btn delete-btn" title="Delete"
+                          (click)="deleteUserGroup(group.id || 0)">🗑️</button> -->
                       </div>
                     </td>
                   </tr>
@@ -1245,7 +1324,7 @@
             </div>
           </div>
         </div>
-        
+
 
       </div>
     </div>

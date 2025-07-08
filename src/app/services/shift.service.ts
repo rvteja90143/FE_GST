@@ -12,9 +12,9 @@ export class ShiftService {
   
   // Mock data for development until backend is ready
   private mockShifts: Shift[] = [
-    { id: 1, name: 'Morning Shift', startTime: '06:00', endTime: '14:00', isActive: true },
-    { id: 2, name: 'Afternoon Shift', startTime: '14:00', endTime: '22:00', isActive: true },
-    { id: 3, name: 'Night Shift', startTime: '22:00', endTime: '06:00', isActive: true }
+    { id: 1, name: 'Morning Shift',description: 'Description1', startTime: '06:00:00 AM', endTime: '06:00:00 PM', isActive: true },
+    { id: 2, name: 'Night Shift',description: 'Description2', startTime: '06:00:00 PM', endTime: '06:00:00 AM', isActive: true },
+    { id: 3, name: 'DayLight Shift',description : '8 hrs Shift', startTime: '07:00:00 AM', endTime: '03:30:00 PM', isActive: false }
   ];
 
   constructor(private http: HttpClient) { }

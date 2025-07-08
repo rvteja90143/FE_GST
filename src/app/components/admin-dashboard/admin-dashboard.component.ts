@@ -106,6 +106,7 @@ interface SpinningMachineForm {
 interface ShiftForm {
   id?: number;
   name: string;
+  description: string;
   startTime: string;
   endTime: string;
   isActive: boolean;
@@ -332,13 +333,13 @@ export class AdminDashboardComponent implements OnInit {
   
   // Form data for edit/add operations
   spinningMachineForm: SpinningMachineForm = { machineName: '', description: '', merge: 0, max: 0, isActive: true };
-  shiftForm: ShiftForm = { name: '', startTime: '', endTime: '', isActive: true };
+  shiftForm: ShiftForm = { name: '',description: '', startTime: '', endTime: '', isActive: true };
   testForm: TestForm = { testName: '', description: '', spinningMachine: '', threadline: '', expirationDate: '', isActive: true };
   userGroupForm: UserGroupForm = { name: '', description: '', permissions: [], isActive: true };
   
   // UI state
   selectedItemId: number | null = null;
-  availablePermissions: string[] = ['read', 'write', 'delete', 'admin'];
+  availablePermissions: string[] = ['Koel', 'Anna', 'Lawrence', 'Fran', 'Mich', 'Rob'];
   
   // Disposition selection for multi-delete
   selectedDispositions = new Set<number>();
@@ -1022,7 +1023,7 @@ export class AdminDashboardComponent implements OnInit {
     
     this.dispositionForm = { disposition: '', description: '', abbreviation: '', isActive: true };
     this.spinningMachineForm = { machineName: '', description: '', merge: 0, max: 0, isActive: true };
-    this.shiftForm = { name: '', startTime: '', endTime: '', isActive: true };
+    this.shiftForm = { name: '',description: '', startTime: '', endTime: '', isActive: true };
     this.testForm = { testName: '', description: '', spinningMachine: '', threadline: '', expirationDate: '', isActive: true };
     this.userGroupForm = { name: '', description: '', permissions: [], isActive: true };
   }
@@ -1849,6 +1850,7 @@ export class AdminDashboardComponent implements OnInit {
     this.isEditing = false;
     this.shiftForm = {
       name: '',
+      description: '',
       startTime: '',
       endTime: '',
       isActive: true
@@ -1863,6 +1865,7 @@ export class AdminDashboardComponent implements OnInit {
     this.shiftForm = {
       id: shift.id,
       name: shift.name,
+      description: shift.description,
       startTime: shift.startTime,
       endTime: shift.endTime,
       isActive: shift.isActive
@@ -1883,6 +1886,11 @@ export class AdminDashboardComponent implements OnInit {
     // Validate required fields
     if (!this.shiftForm.name) {
       this.toastr.error('Shift name is required');
+      return;
+    }
+
+     if (!this.shiftForm.description) {
+      this.toastr.error('Shift description is required');
       return;
     }
     

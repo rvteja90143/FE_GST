@@ -13,9 +13,9 @@ export class UserGroupService {
   
   // Mock data for development until backend is ready
   private mockUserGroups: UserGroup[] = [
-    { id: 1, name: 'Administrators', description: 'Full system access', permissions: ['read', 'write', 'delete', 'admin'], isActive: true },
-    { id: 2, name: 'Supervisors', description: 'Department management', permissions: ['read', 'write'], isActive: true },
-    { id: 3, name: 'Operators', description: 'Machine operation', permissions: ['read'], isActive: true }
+    { id: 1, name: 'Operator', description: 'To access only the spin production screen', permissions: ['Koel','Ana'], isActive: true },
+    { id: 2, name: 'Admin', description: 'Acess on the config screens', permissions: ['Lawrence'], isActive: true },
+    { id: 3, name: 'Test Author', description: 'Full access with rights update record', permissions: ['Fran', 'Mich'], isActive: true }
     
   ];
 
