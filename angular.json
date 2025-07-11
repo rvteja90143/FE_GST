@@ -29,7 +29,10 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              "src/manifest.webmanifest",
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
               "node_modules/ngx-toastr/toastr.css",
@@ -101,7 +104,10 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              "src/manifest.webmanifest",
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
               "src/styles.scss"
